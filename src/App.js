@@ -19,16 +19,15 @@ function App() {
   const [loading, setLoading] = useState(true);
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20";
 
-  async function fetchData() {
-    let response = await getAllPokemon(initialUrl);
-    setNextUrl(response.next);
-    setPrevUrl(response.previous);
-    await loadingPokemon(response.results);
-
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function fetchData() {
+      let response = await getAllPokemon(initialUrl);
+      setNextUrl(response.next);
+      setPrevUrl(response.previous);
+      await loadingPokemon(response.results);
+
+      setLoading(false);
+    }
     fetchData();
   }, []);
 
