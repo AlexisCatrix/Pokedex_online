@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
 import { getAllPokemon, getPokemon } from "./services/FetchData";
+import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import PokemonCard from "./components/PokemonCard";
-import {
-  LoaderContainer,
-  Loading,
-  DisplayCard,
-  PrevAndNext,
-  Prev,
-  Next,
-} from "./AppStyled";
+import PokemonProfil from "./components/PokemonProfil";
+import { PrevAndNext, Prev, Next } from "./AppStyled";
 
-function App() {
+export default function App() {
   const [pokemonData, setPokemonData] = useState([]);
+  const [pokemonSearched, setPokemonSearched] = useState([]);
+  const [pokemonFound, setPokemonFound] = useState([]);
+  const [input, setInput] = useState("");
   const [nextUrl, setNextUrl] = useState("");
   const [prevUrl, setPrevUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20";
+  const searchPokemonUrl =
+    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1118";
 
   useEffect(() => {
     async function fetchData() {
@@ -30,6 +28,20 @@ function App() {
     }
     fetchData();
   }, []);
+
+  const searchPokemon = async (input) => {
+    let response = await getAllPokemon(searchPokemonUrl);
+    setPokemonSearched(response.results);
+
+    let newResult = pokemonSearched.filter((pokemon) => {
+      if (pokemon.name.includes(input)) {
+        return pokemon;
+      }
+      return false;
+    });
+    setInput(input);
+    setPokemonFound(newResult);
+  };
 
   const loadingPokemon = async (data) => {
     let _pokemonData = await Promise.all(
@@ -77,25 +89,28 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/">
+          <HomePage
+            pagination={pagination}
+            searchPokemon={searchPokemon}
+            input={input}
+            setInput={setInput}
+            pokemonFound={pokemonFound}
+            loading={loading}
+            pokemonData={pokemonData}
+            setPokemonFound={setPokemonFound}
+          />
+        </Route>
+        <Route path="/pokemon/profil/:pokemon">
+          <PokemonProfil
+            pokemonFound={pokemonFound}
+            setPokemonFound={setPokemonFound}
+            searchPokemon={searchPokemon}
+            input={input}
+            setInput={setInput}
+          />
+        </Route>
       </Switch>
-      {pagination()}
-      <div>
-        {loading ? (
-          <LoaderContainer>
-            <Loading src="https://media.giphy.com/media/3oz8xCQIuyFVM6XH4k/giphy.gif" />
-          </LoaderContainer>
-        ) : (
-          <DisplayCard>
-            {pokemonData.map((pokemonProfil, i) => {
-              return <PokemonCard key={i} pokemonProfil={pokemonProfil} />;
-            })}
-          </DisplayCard>
-        )}
-      </div>
-      {pagination()}
     </div>
   );
 }
-
-export default App;
