@@ -16,6 +16,8 @@ export default function App() {
   const initialUrl = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20";
   const searchPokemonUrl =
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1118";
+  const [pokemonProperties, setPokemonProperties] = useState({});
+  const [loadingProfil, setLoadingProfil] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -51,6 +53,19 @@ export default function App() {
       })
     );
     setPokemonData(_pokemonData);
+  };
+
+  const fetchPokemonData = async (pokemonName) => {
+    const response = await getAllPokemon(searchPokemonUrl);
+    const allPokemon = response.results;
+
+    const infoPoke = allPokemon.filter((pokemonObject) => {
+      return pokemonObject.name === pokemonName;
+    });
+    const fullInfoPoke = await getPokemon(infoPoke[0].url);
+    setPokemonProperties(fullInfoPoke);
+
+    setLoadingProfil(false);
   };
 
   const previousPage = async () => {
@@ -92,6 +107,7 @@ export default function App() {
         <Route exact path="/">
           <HomePage
             pagination={pagination}
+            fetchPokemonData={fetchPokemonData}
             searchPokemon={searchPokemon}
             input={input}
             setInput={setInput}
@@ -103,7 +119,11 @@ export default function App() {
         </Route>
         <Route path="/pokemon/profil/:pokemon">
           <PokemonProfil
+            loadingProfil={loadingProfil}
             pokemonFound={pokemonFound}
+            pokemonProperties={pokemonProperties}
+            searchPokemonUrl={searchPokemonUrl}
+            fetchPokemonData={fetchPokemonData}
             setPokemonFound={setPokemonFound}
             searchPokemon={searchPokemon}
             input={input}
