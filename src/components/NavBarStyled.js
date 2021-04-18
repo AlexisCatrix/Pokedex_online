@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const BoxTitle = styled.div`
+  display: flex;
   width: 100vw;
   background-color: #f11919;
 `;
 
 export const LinkStyled = styled(Link)`
   text-decoration: none;
+  color: black;
 `;
 
 export const Title = styled.h1`
