@@ -1,38 +1,15 @@
-import {
-  Card,
-  CardsContainer,
-  Name,
-  Picture,
-  Skills,
-  AbilitySection,
-  Li,
-} from "./CardStyled";
+import { Card, CardsContainer, Name, Picture } from "./CardStyled";
+import { LinkStyled } from "./NavBarStyled";
 
 export default function PokemonCard({ pokemonProfil }) {
-  let pokeAbilities = pokemonProfil.abilities.map((ability) => {
-    return ability.ability.name;
-  });
-
   return (
     <CardsContainer>
-      <Card>
-        <Name>{pokemonProfil.name}</Name>
-        <Picture src={pokemonProfil.sprites.front_default} />
-        <Skills>
-          <AbilitySection>Ability </AbilitySection>
-          <div>
-            {pokeAbilities.map((ability, i) => {
-              return (
-                <div key={i}>
-                  <ul>
-                    <Li>{ability}</Li>
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </Skills>
-      </Card>
+      <LinkStyled to={`/pokemon/profil/${pokemonProfil.name}`}>
+        <Card>
+          <Name>{pokemonProfil.name}</Name>
+          <Picture src={pokemonProfil.sprites.front_default} />
+        </Card>
+      </LinkStyled>
     </CardsContainer>
   );
 }
