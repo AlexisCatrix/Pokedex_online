@@ -15,6 +15,7 @@ export const Card = styled.div`
   border: solid 2px red;
   margin: 2vw;
   padding: 2vw;
+  cursor: pointer;
   @media screen and (min-width: 375px) and (max-width: 600px) {
     width: 80vw;
   }

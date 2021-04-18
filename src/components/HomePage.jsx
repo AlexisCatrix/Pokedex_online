@@ -29,8 +29,13 @@ export default function HomePage({
           </LoaderContainer>
         ) : (
           <DisplayCard>
-            {pokemonData.map((pokemonProfil, i) => {
-              return <PokemonCard key={i} pokemonProfil={pokemonProfil} />;
+            {pokemonData.map((pokemonProfil) => {
+              return (
+                <PokemonCard
+                  key={pokemonProfil.name}
+                  pokemonProfil={pokemonProfil}
+                />
+              );
             })}
           </DisplayCard>
         )}
