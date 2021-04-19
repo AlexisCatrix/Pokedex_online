@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "./NavBar";
-import SearchBar from "./SearchBar";
+import NavBar from "../home_page/navigation_bar/NavBar";
+import SearchBar from "../home_page/search_bar/SearchBar";
 import {
   Card,
-  CardsContainer,
+  CardContainer,
   Name,
   Picture,
   Skills,
   AbilitySection,
   Li,
-} from "./CardStyled";
+} from "./pokemonProfilStyled";
 
 export default function PokemonProfil({
   pokemonFound,
@@ -37,15 +37,17 @@ export default function PokemonProfil({
         pokemonFound={pokemonFound}
       />
       {!loadingProfil && (
-        <CardsContainer>
-          <Card>
-            <Name>{pokemonProperties.name}</Name>
+        <CardContainer value="card_container">
+          <Name>{pokemonProperties.name}</Name>
+          <Card value="card">
             <Picture
-              src={pokemonProperties.sprites.front_default}
+              src={pokemonProperties.sprites.other.dream_world.front_default}
               alt={pokemonProperties.name}
             />
-            <Skills>
-              <AbilitySection>Ability </AbilitySection>
+            <Skills value="skills">
+              <AbilitySection value="abilities_section">
+                Ability{" "}
+              </AbilitySection>
               <div>
                 {pokemonProperties.abilities.map((ability, i) => {
                   return (
@@ -59,7 +61,7 @@ export default function PokemonProfil({
               </div>
             </Skills>
           </Card>
-        </CardsContainer>
+        </CardContainer>
       )}
     </div>
   );
