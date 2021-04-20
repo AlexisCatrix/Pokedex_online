@@ -14,8 +14,8 @@ export const Input = styled.input`
   border: solid 1px grey;
   height: auto;
   width: 15vw;
-  @media screen and (min-width: 375px) and (max-width: 600px) {
-    width: 40vw;
+  @media screen and (min-width: 1px) and (max-width: 600px) {
+    width: 60vw;
     height: 30px;
     padding: 1vw;
   }
@@ -31,7 +31,7 @@ export const ResultsContent = styled.div`
   cursor: pointer;
   overflow: auto;
   display: ${({ input }) => (input ? "" : "none")};
-  @media screen and (min-width: 375px) and (max-width: 600px) {
+  @media screen and (min-width: 1px) and (max-width: 600px) {
     height: 100vw;
   }
 `;
@@ -51,7 +51,7 @@ export const Pokemon = styled.p`
     background: #f11919;
     color: white;
   }
-  @media screen and (min-width: 375px) and (max-width: 600px) {
+  @media screen and (min-width: 1px) and (max-width: 600px) {
     padding: 2vw;
   }
 `;

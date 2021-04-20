@@ -51,7 +51,7 @@ export const Card = styled.div`
   animation-name: notHover;
   background: linear-gradient(black, white);
 
-  @media screen and (min-width: 375px) and (max-width: 600px) {
+  @media screen and (min-width: 1px) and (max-width: 600px) {
     width: 80vw;
     height: 80vw;
   }
@@ -86,7 +86,7 @@ export const Picture = styled.img`
     filter: drop-shadow(16px 14px 0px black);
   }
 
-  @media screen and (min-width: 375px) and (max-width: 600px) {
+  @media screen and (min-width: 1px) and (max-width: 600px) {
     max-width: 40vw;
   }
 `;
