@@ -6,6 +6,7 @@ import {
   Card,
   CardContainer,
   Name,
+  PictureContainer,
   Picture,
   Skills,
   AbilitySection,
@@ -40,10 +41,12 @@ export default function PokemonProfil({
         <CardContainer value="card_container">
           <Name>{pokemonProperties.name}</Name>
           <Card value="card">
-            <Picture
-              src={pokemonProperties.sprites.other.dream_world.front_default}
-              alt={pokemonProperties.name}
-            />
+            <PictureContainer value="picture_container">
+              <Picture
+                src={pokemonProperties.sprites.other.dream_world.front_default}
+                alt={pokemonProperties.name}
+              />
+            </PictureContainer>
             <Skills value="skills">
               <AbilitySection value="abilities_section">
                 Ability{" "}
