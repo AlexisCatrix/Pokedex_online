@@ -22,6 +22,9 @@ export default function PokemonProfil({
   loadingProfil,
   setInput,
 }) {
+  const pathSpriteDreamWorld = `dream_world`;
+  const pathSpriteArtwork = `official-artwork`;
+
   let { pokemon } = useParams();
 
   useEffect(() => {
@@ -43,7 +46,17 @@ export default function PokemonProfil({
           <Card value="card">
             <PictureContainer value="picture_container">
               <Picture
-                src={pokemonProperties.sprites.other.dream_world.front_default}
+                src={
+                  pokemonProperties.sprites.other[pathSpriteArtwork]
+                    .front_default !== null
+                    ? pokemonProperties.sprites.other[pathSpriteArtwork]
+                        .front_default
+                    : pokemonProperties.sprites.other[pathSpriteDreamWorld]
+                        .front_default !== null
+                    ? pokemonProperties.sprites.other[pathSpriteDreamWorld]
+                        .front_default
+                    : pokemonProperties.sprites.front_default
+                }
                 alt={pokemonProperties.name}
               />
             </PictureContainer>
