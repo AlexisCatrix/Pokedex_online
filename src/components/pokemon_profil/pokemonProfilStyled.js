@@ -5,8 +5,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   @media screen and (min-width: 375px) and (max-width: 600px) {
     align-items: center;
-    height: 100vh;
-    /* width: 100%; */
+    width: auto;
   }
 `;
 
@@ -14,21 +13,19 @@ export const Card = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  border: solid 16px #f11919;
+  border: solid 18px #f11919;
   border-radius: 10px;
-  height: 60vh;
   margin: 2vw;
 
   animation-duration: 0.2s;
   animation-name: notHover;
-  background: linear-gradient(black, white);
+  background: linear-gradient(black 0%, white 60%);
 
   @media screen and (min-width: 375px) and (max-width: 600px) {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 92vw;
-    height: auto;
+    width: 90.5vw;
   }
 `;
 
@@ -45,29 +42,37 @@ export const Name = styled.h1`
   text-shadow: 2px 4px 2px black;
 `;
 
+export const PictureContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: 375px) and (max-width: 600px) {
+    height: 50vh;
+  }
+`;
+
 export const Picture = styled.img`
-  max-width: 20vw;
-  height: auto;
+  width: 20vw;
   padding: 2vw;
   margin: 2vw;
   filter: drop-shadow(16px 14px 0px black);
 
   @media screen and (min-width: 375px) and (max-width: 600px) {
-    max-width: 60vw;
+    width: 60vw;
+    margin: 4vw;
   }
 `;
 
 export const Skills = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
   font-family: "Press Start 2P", cursive;
-  margin-right: 0vw;
-  border: 16px ridge #f11919;
+  border: 18px ridge #f11919;
   width: 75vw;
-  background: #20d62b;  
-  @media screen and (min-width: 375px) and (max-width: 600px) {
-    width: 78vw;  
-    height: 100vh;
-    padding: 4vw;
+  background: #20d62b;
+  @media screen and (min-width: 375px) and (max-width: 800px) {
+    width: 70vw;
+    height: auto;
+    padding: 4vw 6vw;
   }
 `;
 
