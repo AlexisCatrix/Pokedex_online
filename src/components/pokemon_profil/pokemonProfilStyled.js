@@ -58,7 +58,7 @@ export const Picture = styled.img`
   filter: drop-shadow(16px 14px 0px black);
 
   @media screen and (min-width: 375px) and (max-width: 600px) {
-    width: 60vw;
+    width: 80vw;
     margin: 4vw;
   }
 `;
