@@ -15,12 +15,14 @@ export const LinkStyled = styled(Link)`
 export const Title = styled.h1`
   @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
   font-family: "Permanent Marker", cursive;
-  color: white;
-  font-size: 1.5em;
+  color: #ffcb05;
+  font-size: 2em;
   margin: 2vw;
   font-weight: bold;
+  -webkit-text-stroke: 1.5px #3b5ca8;
+
   :hover {
-    text-shadow: 2px 8px 2px black;
+    text-shadow: 2px 8px 0px black;
   }
 `;
 export const Items = styled.li`

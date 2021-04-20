@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "./services/FetchData";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import PokemonProfil from "./components/PokemonProfil";
+import HomePage from "./components/home_page/HomePage";
+import PokemonProfil from "./components/pokemon_profil/PokemonProfil";
 import { PrevAndNext, Prev, Next } from "./AppStyled";
 
 export default function App() {

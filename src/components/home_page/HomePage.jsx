@@ -1,7 +1,7 @@
-import NavBar from "./NavBar";
-import SearchBar from "./SearchBar";
-import PokemonCard from "./PokemonCard";
-import { LoaderContainer, Loading, DisplayCard } from "../AppStyled";
+import NavBar from "./navigation_bar/NavBar";
+import SearchBar from "./search_bar/SearchBar";
+import PokemonCard from "./pokemon_card/PokemonCard";
+import { LoaderContainer, Loading, DisplayCard } from "../../AppStyled";
 
 export default function HomePage({
   pagination,
