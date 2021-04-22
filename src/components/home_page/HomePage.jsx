@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getAllPokemon, getPokemon } from "./../../services/FetchData";
-import NavBar from "./navigation_bar/NavBar";
-import SearchBar from "./search_bar/SearchBar";
-import PokemonCard from "./pokemon_card/PokemonCard";
+import { getAllPokemon, getPokemon } from "../../services/FetchData";
+import NavBar from "../navigation_bar/NavBar";
+import SearchBar from "../search_bar/SearchBar";
+import PokemonCard from "../pokemon_card/PokemonCard";
 import {
   LoaderContainer,
   Loading,
@@ -10,7 +10,7 @@ import {
   PrevAndNext,
   Prev,
   Next,
-} from "../../AppStyled";
+} from "./homePageStyled";
 
 export default function HomePage() {
   const [pokemonData, setPokemonData] = useState([]);

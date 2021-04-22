@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getAllPokemon, getPokemon } from "./../../services/FetchData";
-import NavBar from "../home_page/navigation_bar/NavBar";
-import SearchBar from "../home_page/search_bar/SearchBar";
-import { LoaderContainer, Loading } from "../../AppStyled";
+import NavBar from "..//navigation_bar/NavBar";
+import SearchBar from "../search_bar/SearchBar";
+import { LoaderContainer, Loading } from "./../home_page/homePageStyled";
 import {
   Card,
   CardContainer,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getAllPokemon } from "./../../../services/FetchData";
+import { getAllPokemon } from "./../../services/FetchData";
 import {
   Container,
   Input,
