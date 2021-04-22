@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { getAllPokemon, getPokemon } from "./../../services/FetchData";
 import NavBar from "../home_page/navigation_bar/NavBar";
 import SearchBar from "../home_page/search_bar/SearchBar";
+import { LoaderContainer, Loading } from "../../AppStyled";
 import {
   Card,
   CardContainer,
@@ -13,34 +15,41 @@ import {
   Li,
 } from "./pokemonProfilStyled";
 
-export default function PokemonProfil({
-  pokemonFound,
-  pokemonProperties,
-  fetchPokemonData,
-  searchPokemon,
-  input,
-  loadingProfil,
-  setInput,
-}) {
+export default function PokemonProfil() {
+  const [pokemonProperties, setPokemonProperties] = useState({});
+  const [loadingProfil, setLoadingProfil] = useState(true);
+
+  const searchPokemonUrl =
+    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1118";
   const pathSpriteDreamWorld = `dream_world`;
   const pathSpriteArtwork = `official-artwork`;
 
   let { pokemon } = useParams();
 
   useEffect(() => {
+    const fetchPokemonData = async (pokemonName) => {
+      setLoadingProfil(true);
+      setPokemonProperties({});
+
+      const response = await getAllPokemon(searchPokemonUrl);
+      const allPokemon = response.results;
+
+      const infoPoke = allPokemon.filter((pokemonObject) => {
+        return pokemonObject.name === pokemonName;
+      });
+      const fullInfoPoke = await getPokemon(infoPoke[0].url);
+      setPokemonProperties(fullInfoPoke);
+
+      setLoadingProfil(false);
+    };
     fetchPokemonData(pokemon);
-  });
+  }, [pokemon]);
 
   return (
     <div>
       <NavBar />
-      <SearchBar
-        searchPokemon={searchPokemon}
-        input={input}
-        setInput={setInput}
-        pokemonFound={pokemonFound}
-      />
-      {!loadingProfil && (
+      <SearchBar />
+      {!loadingProfil ? (
         <CardContainer value="card_container">
           <Name>{pokemonProperties.name}</Name>
           <Card value="card">
@@ -78,6 +87,10 @@ export default function PokemonProfil({
             </Skills>
           </Card>
         </CardContainer>
+      ) : (
+        <LoaderContainer>
+          <Loading src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+        </LoaderContainer>
       )}
     </div>
   );
