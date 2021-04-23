@@ -1,58 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getAllPokemon } from "./../../services/FetchData";
+import { useDebounce } from "use-debounce";
 import {
   Container,
-  Input,
   ResultsContent,
+  Input,
   Result,
   Pokemon,
   LinkStyled,
 } from "./SearchBarStyled";
 
 export default function SearchBar() {
-  const [input, setInput] = useState("");
-  const [pokemonSearched, setPokemonSearched] = useState([]);
+  const [pokemonSearched, setPokemonSearched] = useState("");
   const [pokemonFound, setPokemonFound] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [debouncedSearchTerm] = useDebounce(pokemonSearched, 1000);
 
   const searchPokemonUrl =
     "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1118";
 
-  const searchPokemon = async (input) => {
-    let response = await getAllPokemon(searchPokemonUrl);
-    setPokemonSearched(response.results);
-
-    const newResult = pokemonSearched.filter((pokemon) => {
-      if (pokemon.name.includes(input)) {
-        return pokemon;
+  useEffect(() => {
+    const searchPokemon = async () => {
+      if (debouncedSearchTerm) {
+        setIsSearching(true);
+        let response = await getAllPokemon(searchPokemonUrl);
+        setIsSearching(false);
+        const newResult = response.results.filter((pokemon) => {
+          if (pokemon.name.includes(pokemonSearched)) {
+            return pokemon;
+          }
+          return false;
+        });
+        setPokemonFound(newResult);
+      } else {
+        setPokemonFound([]);
       }
-      return false;
-    });
-    setInput(input);
-    setPokemonFound(newResult);
-  };
+    };
+
+    searchPokemon();
+  }, [debouncedSearchTerm, pokemonSearched]);
 
   return (
     <Container>
       <Input
-        onChange={(e) => searchPokemon(e.target.value)}
+        onChange={(e) => setPokemonSearched(e.target.value)}
         placeholder="search your pokemon"
       />
-      <ResultsContent input={input}>
-        {input
-          ? pokemonFound.map((pokemon) => (
-              <Result key={pokemon.name}>
-                <LinkStyled to={`/pokemon/profil/${pokemon.name}`}>
-                  <Pokemon
-                    onClick={() => {
-                      setInput("");
-                    }}
-                  >
-                    {pokemon.name}
-                  </Pokemon>
-                </LinkStyled>
-              </Result>
-            ))
-          : ""}
+      <ResultsContent pokemonSearched={pokemonSearched}>
+        {isSearching ? (
+          <div>
+            <p>searching...</p>
+          </div>
+        ) : (
+          pokemonFound.map((pokemon) => (
+            <Result key={pokemon.name}>
+              <LinkStyled to={`/pokemon/profil/${pokemon.name}`}>
+                <Pokemon
+                  onClick={() => {
+                    setPokemonSearched("");
+                  }}
+                >
+                  {pokemon.name}
+                </Pokemon>
+              </LinkStyled>
+            </Result>
+          ))
+        )}
       </ResultsContent>
     </Container>
   );

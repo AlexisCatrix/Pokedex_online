@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getAllPokemon, getPokemon } from "../../services/FetchData";
+import { useDebouncedCallback } from "use-debounce";
 import NavBar from "../navigation_bar/NavBar";
 import SearchBar from "../search_bar/SearchBar";
 import PokemonCard from "../pokemon_card/PokemonCard";
@@ -41,7 +42,7 @@ export default function HomePage() {
     setPokemonData(_pokemonData);
   };
 
-  const previousPage = async () => {
+  const previousPage = useDebouncedCallback(async () => {
     if (prevUrl === null) return;
     setLoading(true);
     let data = await getAllPokemon(prevUrl);
@@ -49,9 +50,9 @@ export default function HomePage() {
     setNextUrl(data.next);
     setPrevUrl(data.previous);
     setLoading(false);
-  };
+  }, 500);
 
-  const nextPage = async () => {
+  const nextPage = useDebouncedCallback(async () => {
     if (nextUrl === null) return;
     setLoading(true);
     let data = await getAllPokemon(nextUrl);
@@ -59,7 +60,7 @@ export default function HomePage() {
     setNextUrl(data.next);
     setPrevUrl(data.previous);
     setLoading(false);
-  };
+  }, 500);
 
   const pagination = () => {
     return (
