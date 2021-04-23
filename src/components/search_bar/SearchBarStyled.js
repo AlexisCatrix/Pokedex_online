@@ -30,7 +30,7 @@ export const ResultsContent = styled.div`
   height: 30vh;
   cursor: pointer;
   overflow: auto;
-  display: ${({ input }) => (input ? "" : "none")};
+  display: ${({ pokemonSearched }) => (pokemonSearched ? "" : "none")};
   @media screen and (min-width: 1px) and (max-width: 600px) {
     height: 100vw;
   }
