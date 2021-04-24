@@ -27,13 +27,11 @@ export const ResultsContent = styled.div`
   position: relative;
   margin: 0.5vw 2vw;
   width: auto;
-  height: 30vh;
+  min-height: min-content;
+  max-height: 30vh;
   cursor: pointer;
   overflow: auto;
   display: ${({ pokemonSearched }) => (pokemonSearched ? "" : "none")};
-  @media screen and (min-width: 1px) and (max-width: 600px) {
-    height: 100vw;
-  }
 `;
 
 export const Result = styled.div`
