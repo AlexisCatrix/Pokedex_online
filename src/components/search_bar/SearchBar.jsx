@@ -26,7 +26,7 @@ export default function SearchBar() {
         let response = await getAllPokemon(searchPokemonUrl);
         setIsSearching(false);
         const newResult = response.results.filter((pokemon) => {
-          if (pokemon.name.includes(pokemonSearched)) {
+          if (pokemon.name.includes(pokemonSearched.toLowerCase())) {
             return pokemon;
           }
           return false;
